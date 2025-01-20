@@ -1,4 +1,3 @@
-﻿/* IconHelper.ConvertToIcon("F:\\Programming\\repos\\ToIconConverter\\ToIcon.Console\\MDiamond.png",
- "F:\\Programming\\repos\\ToIconConverter\\ToIcon.Console\\MDiamond.ico", 256, true);*/
+﻿IconHelper.ConvertToIcon("C:\\Users\\vladi\\Downloads\\and-1-1-logo-png-transparent.png", "C:\\Users\\vladi\\Downloads\\and-1-1-logo-png-transparent.ico", 256, true);
 
 Console.WriteLine("End");

@@ -18,12 +18,18 @@ public class ToIconController : ControllerBase
         _webHostEnv = webHostEnv;
     }
 
+    /// <summary>
+    /// Converts the image to an .ico file.
+    /// </summary>
+    /// <param name="file">The image to make an .ico from.</param>
+    /// <param name="size">The size for the .ico (must be the power of 2).</param>
+    /// <returns></returns>
     [HttpPost]
-    public async Task<IActionResult> ConvertToIco([FromForm] UploadedFile file)
+    public async Task<IActionResult> ConvertToIco([FromForm] UploadedFile file, int size)
     {
         try
         {
-            if (file.File.Length > 0 && file.File != null)
+            if (file.File.Length > 0 && file.File != null && (size > 0) && ((size & (size - 1)) == 0))
             {
                 string path = _webHostEnv.ContentRootPath + "\\Uploaded Files\\";
                 if (!Directory.Exists(path))
@@ -42,7 +48,7 @@ public class ToIconController : ControllerBase
                     {
                         await file.File.CopyToAsync(memoryStream);
                         Image img = Image.FromStream(memoryStream);
-                        IconHelper.ConvertToIcon(memoryStream, stream, img.Height, true);
+                        IconHelper.ConvertToIcon(memoryStream, stream, size, true);
                         await memoryStream.FlushAsync();
                         _lastFileName = path + Path.GetFileNameWithoutExtension(file.File.FileName) + ".ico";
                     }
