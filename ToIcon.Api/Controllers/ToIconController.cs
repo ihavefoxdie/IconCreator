@@ -12,7 +12,7 @@ namespace ToIcon.Api.Controllers;
 public class ToIconController : ControllerBase
 {
     private static IWebHostEnvironment _webHostEnv;
-    private static string _lastFileName;
+    private static string _lastFileName = "";
     public ToIconController(IWebHostEnvironment webHostEnv)
     {
         _webHostEnv = webHostEnv;

@@ -113,7 +113,7 @@ public static class IconHelper
     /// <param name="preserveAspectRatio">Preserve the aspect ratio</param>
     /// <returns>ico byte array / null for error</returns>
     [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-    public static byte[] ConvertToIcon(Image image, bool preserveAspectRatio = false)
+    public static byte[]? ConvertToIcon(Image image, bool preserveAspectRatio = false)
     {
         MemoryStream inputStream = new MemoryStream();
         image.Save(inputStream, ImageFormat.Png);
