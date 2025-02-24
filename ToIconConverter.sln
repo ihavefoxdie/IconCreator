@@ -5,9 +5,9 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToIcon.Api", "ToIcon.Api\ToIcon.Api.csproj", "{CA5AB168-D724-49EB-B2D5-5A6BEB508D65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToIconConsole", "ToIcon.Console\ToIconConsole.csproj", "{38F14FC3-30AC-48A8-AF3E-E5471CA0374F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToIcon.Console", "ToIcon.Console\ToIcon.Console.csproj", "{38F14FC3-30AC-48A8-AF3E-E5471CA0374F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToIconLibrary", "ToIcon.Library\ToIconLibrary.csproj", "{34D50914-4C00-4ECC-8F76-0406BDF4168D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToIcon.Library", "ToIcon.Library\ToIcon.Library.csproj", "{34D50914-4C00-4ECC-8F76-0406BDF4168D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

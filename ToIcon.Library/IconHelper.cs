@@ -1,10 +1,12 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
+
+namespace ToIcon.Library;
 
 /// <summary>
 /// Provides helper methods for imaging
 /// </summary>
+[Obsolete("Use IconHelperCrossplatform instead")]
 public static class IconHelper
 {
     /// <summary>

@@ -1,18 +1,17 @@
-﻿using System.Data;
-using System.Drawing;
-using System.IO;
+﻿using System.Drawing;
 using Microsoft.AspNetCore.Mvc;
 using ToIcon.Api.Models;
+using ToIcon.Library;
 
 namespace ToIcon.Api.Controllers;
 
-[System.Runtime.Versioning.SupportedOSPlatform("windows")]
+//[System.Runtime.Versioning.SupportedOSPlatform("windows")]
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class ToIconController : ControllerBase
 {
     private static IWebHostEnvironment _webHostEnv;
-    private static string _lastFileName = "";
+    private static string _lastFilePath = "";
     public ToIconController(IWebHostEnvironment webHostEnv)
     {
         _webHostEnv = webHostEnv;
@@ -42,18 +41,18 @@ public class ToIconController : ControllerBase
                     System.IO.File.Delete(path + Path.GetFileNameWithoutExtension(file.File.FileName) + ".ico");
                 }
 
-                using (FileStream stream = System.IO.File.Create(path + Path.GetFileNameWithoutExtension(file.File.FileName) + ".ico"))
-                {
-                    using (MemoryStream memoryStream = new())
-                    {
-                        await file.File.CopyToAsync(memoryStream);
-                        Image img = Image.FromStream(memoryStream);
-                        IconHelper.ConvertToIcon(memoryStream, stream, size, true);
-                        await memoryStream.FlushAsync();
-                        _lastFileName = path + Path.GetFileNameWithoutExtension(file.File.FileName) + ".ico";
-                    }
-                    await stream.FlushAsync();
-                }
+                using FileStream stream = new(path + Path.GetFileNameWithoutExtension(file.File.FileName) + ".ico", FileMode.OpenOrCreate);
+
+                using MemoryStream memoryStream = new();
+
+                await file.File.CopyToAsync(memoryStream);
+                byte[] imageBytes = memoryStream.ToArray();
+                IconHelperCrossplatform.ConvertToIcon(imageBytes, stream, size, true);
+                await memoryStream.FlushAsync();
+                _lastFilePath = path + Path.GetFileNameWithoutExtension(file.File.FileName) + ".ico";
+
+                await stream.FlushAsync();
+
 
                 return Ok();
             }
@@ -70,9 +69,9 @@ public class ToIconController : ControllerBase
     {
         try
         {
-            if (System.IO.File.Exists(_lastFileName))
+            if (System.IO.File.Exists(_lastFilePath))
             {
-                return PhysicalFile(_lastFileName, "image/ico");
+                return PhysicalFile(_lastFilePath, "image/ico", "image.ico");
             }
             return BadRequest();
         }

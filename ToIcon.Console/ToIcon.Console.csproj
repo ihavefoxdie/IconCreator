@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\ToIcon.Library\ToIconLibrary.csproj" />
+    <ProjectReference Include="..\ToIcon.Library\ToIcon.Library.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
